@@ -1,0 +1,189 @@
+/* Apply border-box sizing so padding and borders are included in width/height */
+* {
+  box-sizing: border-box;
+}
+
+/* Base page styling */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #0b0f14;
+  color: #e8eef6;
+}
+
+/* Main application layout using CSS Grid */
+.app {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  min-height: 100vh;
+}
+
+/* Top header bar containing title and stats */
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Page title styling */
+.titleBlock h1 {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+}
+
+/* Subtitle under the main title */
+.titleBlock p {
+  margin: 0;
+  color: rgba(232, 238, 246, 0.75);
+  font-size: 13px;
+}
+
+/* Container for the game statistics */
+.stats {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Individual stat card */
+.stat {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 92px;
+  text-align: center;
+}
+
+/* Label text inside stat cards */
+.stat .label {
+  font-size: 11px;
+  color: rgba(232, 238, 246, 0.7);
+}
+
+/* Numeric value inside stat cards */
+.stat .value {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* Prompt and controls section below the header */
+.panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Prompt area showing the current location to find */
+.prompt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+/* Rounded badge used for the "Find:" label */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  font-weight: 600;
+}
+
+/* Emphasized location name text */
+.promptText {
+  font-weight: 700;
+}
+
+/*
+  Ensure UI elements stay above the map.
+  This prevents them from blocking map interactions visually.
+*/
+.promptBar,
+header,
+.panel {
+  position: relative;
+  z-index: 2;
+}
+
+/* Container for reset button and hint text */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Base button styling */
+button {
+  background: rgba(255, 255, 255, 0.10);
+  color: #e8eef6;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Button hover state */
+button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Small instructional hint text */
+.hint {
+  font-size: 12px;
+  color: rgba(232, 238, 246, 0.65);
+  white-space: nowrap;
+}
+
+/* Toast message used for feedback (correct, wrong, finished) */
+.toast {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 200ms ease, transform 200ms ease;
+  pointer-events: none;
+}
+
+/* Visible state for toast message */
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Google Maps container */
+#map {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/*
+  Wrapper used to visually crop the map horizontally.
+  This controls how much of the map is visible without changing zoom.
+*/
+.map-wrapper {
+  width: 70vw;
+  height: 85vh;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+}

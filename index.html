@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Character encoding and responsive layout -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Page title shown in browser tab -->
+    <title>CSUN Map Quiz</title>
+
+    <!-- Main stylesheet for layout and visuals -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- jQuery library used for simple DOM updates and event handling -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Main JavaScript file containing game logic -->
+    <!-- defer ensures the script runs after the HTML is parsed -->
+    <script src="script.js" defer></script>
+
+    <!-- Google Maps JavaScript API -->
+    <!-- The callback calls initMap() once the API finishes loading -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxj2IhucU7biQ9IZVgu-eeW-hujVG8Z34&callback=initMap"
+      async
+      defer
+    ></script>
+  </head>
+
+  <body>
+    <!-- Main application wrapper -->
+    <div class="app">
+
+      <!-- Top bar containing title and game statistics -->
+      <header class="topbar">
+        <div class="titleBlock">
+          <h1>CSUN Location Quiz</h1>
+          <p>Double-click the correct building. (Pan/zoom disabled.)</p>
+        </div>
+
+        <!-- Game statistics display -->
+        <div class="stats">
+          <div class="stat">
+            <div class="label">Question</div>
+            <div class="value" id="qCount">1 / 5</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Correct</div>
+            <div class="value" id="score">0</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Time</div>
+            <div class="value" id="timer">00:00</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Best</div>
+            <div class="value" id="best">—</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Section displaying the current location prompt -->
+      <section class="panel">
+        <div class="prompt">
+          <span class="badge">Find:</span>
+          <!-- Updated dynamically by JavaScript -->
+          <span class="promptText" id="promptText">Loading…</span>
+        </div>
+
+        <!-- Game controls -->
+        <div class="controls">
+          <!-- Resets the game state -->
+          <button id="resetBtn" type="button">Reset</button>
+
+          <!-- Instructional hint for the user -->
+          <span class="hint">
+            Tip: double-click only (single click does nothing).
+          </span>
+        </div>
+      </section>
+
+      <!-- Wrapper used to visually crop the map horizontally -->
+      <div class="map-wrapper">
+        <!-- Google Maps container -->
+        <!-- This element is required for the map to render -->
+        <main id="map"></main>
+      </div>
+
+      <!-- Toast message used for feedback (correct / wrong / finished) -->
+      <div class="toast" id="toast" aria-live="polite"></div>
+    </div>
+  </body>
+</html>
